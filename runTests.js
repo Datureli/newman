@@ -1,5 +1,5 @@
 require('dotenv').config();
-const newman = require('newman'); // require newman in your project
+const newman = require('newman');
 
 newman.run({
     collection: require('./postman/Mock-bank_api.json'), // Upewnij się, że ścieżka do pliku JSON jest poprawna
