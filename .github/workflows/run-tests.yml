@@ -1,4 +1,4 @@
-name: Run API Tests
+name: run-tests
 
 on:
   push:
@@ -11,17 +11,18 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3   # Użycie najnowszej wersji
+    - name: Checkout code
+      uses: actions/checkout@v3  # Aktualizacja do wersji v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3  # Wersja 3, wymuszenie Node.js 20
-        with:
-          node-version: '20'  # Ręczne wymuszenie Node.js 20
+    - name: Setup Node.js
+      uses: actions/setup-node@v3  # Aktualizacja do wersji v3
+      with:
+        node-version: '20'  # Ustawienie Node.js 20
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      - name: Run Newman tests
-        run: npx newman run postman/Mock-bank_api.json
+    - name: Run tests
+      run: npm test
