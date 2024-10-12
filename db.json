@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "john_doe",
+      "password": "1234",
+      "token": "abcd1234"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Laptop",
+      "price": 1000,
+      "stock": 5
+    },
+    {
+      "id": "2",
+      "name": "Smartphone",
+      "price": 500,
+      "stock": 10
+    }
+  ],
+  "cart": [
+    {
+      "id": "3137",
+      "productId": 1,
+      "quantity": 1
+    }
+  ],
+  "orders": []
+}
