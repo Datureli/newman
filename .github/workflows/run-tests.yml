@@ -3,26 +3,25 @@ name: Run API Tests
 on:
   push:
     branches:
-      - main  # Zmien na nazwe gałęzi, do której chcesz dodawać testy
+      - main
   pull_request:
     branches:
       - main
 
 jobs:
-  run-tests:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'  # Zmien na wersję Node.js, której potrzebujesz
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run Newman tests
-      run: npx newman run ./postman/Mock-bank_api.json --environment ./postman/environment.json  # Zmien ścieżki, jeśli to konieczne
+      - name: Run Newman tests
+        run: npx newman run postman/Mock-bank_api.json
