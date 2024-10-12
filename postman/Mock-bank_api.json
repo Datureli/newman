@@ -1,0 +1,80 @@
+{
+    "info": {
+        "name": "Mock Bank API Tests",
+        "description": "Kolekcja testów API dla fikcyjnego banku na Mocky",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Sprawdzenie salda",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "https://run.mocky.io/v3/21d2d81e-c71d-4e10-9a50-66e01de030a8",
+                    "protocol": "https",
+                    "host": ["run", "mocky", "io"],
+                    "path": ["v3", "21d2d81e-c71d-4e10-9a50-66e01de030a8"]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "// Test czy pole balance istnieje",
+                            "pm.test('Sprawdź czy saldo (balance) istnieje', function () {",
+                            "    pm.expect(jsonData.balance).to.exist;",
+                            "});",
+                            "",
+                            "// Test czy balance jest liczbą",
+                            "pm.test('Saldo (balance) jest liczbą', function () {",
+                            "    pm.expect(jsonData.balance).to.be.a('number');",
+                            "});"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Historia transakcji",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "https://run.mocky.io/v3/21d2d81e-c71d-4e10-9a50-66e01de030a8",
+                    "protocol": "https",
+                    "host": ["run", "mocky", "io"],
+                    "path": ["v3", "21d2d81e-c71d-4e10-9a50-66e01de030a8"]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "// Test czy lista transakcji istnieje",
+                            "pm.test('Sprawdź czy lista transakcji istnieje', function () {",
+                            "    pm.expect(jsonData.transactions).to.exist;",
+                            "});",
+                            "",
+                            "// Test czy transakcje to tablica",
+                            "pm.test('Transakcje to tablica', function () {",
+                            "    pm.expect(jsonData.transactions).to.be.an('array');",
+                            "});",
+                            "",
+                            "// Test czy każda transakcja ma pole kwota (amount)",
+                            "pm.test('Każda transakcja ma pole amount', function () {",
+                            "    jsonData.transactions.forEach(function(transaction) {",
+                            "        pm.expect(transaction.amount).to.exist;",
+                            "    });",
+                            "});"
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

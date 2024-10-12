@@ -26,7 +26,39 @@
       "id": "3137",
       "productId": 1,
       "quantity": 1
+    },
+    {
+      "id": "4020",
+      "productId": 1,
+      "quantity": 1
+    },
+    {
+      "id": "1a75",
+      "productId": 1,
+      "quantity": 1
+    },
+    {
+      "id": "3633",
+      "productId": 1,
+      "quantity": 1
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "id": "1",
+      "userId": "1",
+      "items": [
+        {
+          "productId": 1,
+          "quantity": 1
+        },
+        {
+          "productId": 2,
+          "quantity": 1
+        }
+      ],
+      "total": 1500,
+      "status": "confirmed"
+    }
+  ]
 }
