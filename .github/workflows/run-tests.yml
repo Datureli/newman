@@ -1,4 +1,4 @@
-name: run-tests
+name: Run API Tests
 
 on:
   push:
@@ -14,15 +14,15 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # Aktualizacja do wersji v3
+      uses: actions/checkout@v3
 
     - name: Setup Node.js
-      uses: actions/setup-node@v3  # Aktualizacja do wersji v3
+      uses: actions/setup-node@v3
       with:
-        node-version: '20'  # Ustawienie Node.js 20
+        node-version: '20'
 
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: npm test
+    - name: Run API tests from folder
+      run: npm run test:folder
