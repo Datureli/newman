@@ -3,8 +3,8 @@ const newman = require('newman'); // Ładuje Newmana
 const fs = require('fs');
 
 // Wczytaj kod testowy z pliku balanceTests.js
-const balanceTestsScript = fs.readFileSync('./balanceTests.js', 'utf-8');
-const transactionTestsScript = fs.readFileSync('./transactionTests.js', 'utf-8');
+const balanceTestsScript = fs.readFileSync('./postman-test-scripts/balanceTests.js', 'utf-8');
+const transactionTestsScript = fs.readFileSync('./postman-test-scripts/transactionTests.js', 'utf-8');
 
 // Wczytaj kolekcję Postmana
 const collection = require('./postman/Mock-bank_api.json');
