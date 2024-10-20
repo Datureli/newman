@@ -1,35 +1,35 @@
 {
-    "info": {
-        "name": "Mock Bank API Tests",
-        "description": "Kolekcja testów API dla fikcyjnego banku na Mocky",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-    },
-    "item": [
-        {
-            "name": "Sprawdzenie salda",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "{{MOCK_API_URL}}",
-                    "protocol": "https",
-                    "host": ["run", "mocky", "io"],
-                    "path": ["v3", "56c76fcd-c28f-4dfb-915a-18880aee639b"]
-                }
-            },
-            "response": []
-        },
-        {
-            "name": "Historia transakcji",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "{{MOCK_API_URL}}",
-                    "protocol": "https",
-                    "host": ["run", "mocky", "io"],
-                    "path": ["v3", "21d2d81e-c71d-4e10-9a50-66e01de030a8"]
-                }
-            },
-            "response": []
+  "info": {
+    "name": "Mock Bank API Tests",
+    "description": "Kolekcja testów API dla fikcyjnego banku na Mocky",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Sprawdzenie salda",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{MOCK_API_URL}}",
+          "protocol": "https",
+          "host": ["run", "mocky", "io"],
+          "path": ["v3", "56c76fcd-c28f-4dfb-915a-18880aee639b"]
         }
-    ]
+      },
+      "response": []
+    },
+    {
+      "name": "Historia transakcji",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{MOCK_API_URL}}",
+          "protocol": "https",
+          "host": ["run", "mocky", "io"],
+          "path": ["v3", "21d2d81e-c71d-4e10-9a50-66e01de030a8"]
+        }
+      },
+      "response": []
+    }
+  ]
 }
