@@ -9,29 +9,17 @@ const scriptsDir = './postman-test-scripts';
 const testFiles = fs.readdirSync(scriptsDir).filter(file => file.endsWith('.js'));
 
 testFiles.forEach((file, index) => {
-    const scriptContent = fs.readFileSync(path.join(scriptsDir, file), 'utf-8');
-
-    if (!collection.item[index].event) {
-        collection.item[index].event = [{ listen: 'test', script: { exec: [] } }];
-    }
-
-    collection.item[index].event[0].script.exec = scriptContent.split('\n');
+  const scriptContent = fs.readFileSync(path.join(scriptsDir, file), 'utf-8');
+  collection.item[index].event = collection.item[index].event || [{ listen: 'test', script: { exec: [] } }];
+  collection.item[index].event[0].script.exec = scriptContent.split('\n');
 });
 
-collection.item.forEach((item, index) => {
-    const apiUrl = `${process.env.MOCK_API_URL}/v3/${item.request.url.raw.split('/').pop()}`;
-    item.request.url.raw = apiUrl;
+collection.item.forEach(item => {
+  const apiPath = item.request.url.raw.split('/').pop();
+  item.request.url.raw = `${process.env.MOCK_API_URL}/v3/${apiPath}`;
 });
 
-newman.run(
-    {
-        collection: collection,
-        reporters: 'cli',
-    },
-    function (err, summary) {
-        if (err) {
-            throw err;
-        }
-        console.log('Testy zostały zakończone.');
-    }
-);
+newman.run({ collection, reporters: 'cli' }, (err, summary) => {
+  if (err) throw err;
+  console.log('Testy zostały zakończone.');
+});
