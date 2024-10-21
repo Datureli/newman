@@ -1,9 +1,15 @@
-name: CI
+name: Run API Tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,5 +24,5 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: node runTests.js
+    - name: Run API tests from folder
+      run: npm run test:folder
