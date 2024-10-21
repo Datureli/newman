@@ -1,0 +1,52 @@
+{
+    "info": {
+      "name": "Login API Tests",
+      "description": "Kolekcja testów API dla logowania użytkowników na Mocky",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Test poprawnego logowania",
+        "request": {
+          "method": "POST",
+          "url": {
+            "raw": "{{LOGIN_API_URL}}",
+            "protocol": "https"
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\"username\": \"john_doe\", \"password\": \"John!12345\"}"
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Test niepoprawnego logowania",
+        "request": {
+          "method": "POST",
+          "url": {
+            "raw": "{{LOGIN_API_URL}}",
+            "protocol": "https"
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\"username\": \"wrong_user\", \"password\": \"wrong_pass\"}"
+          }
+        },
+        "response": []
+      }
+    ]
+  }
+  

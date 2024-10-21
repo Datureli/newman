@@ -7,7 +7,7 @@ const path = require('path');
 const collection = require('./postman/Mock-bank_api.json');
 
 // Wczytanie skryptów testowych
-const scriptsDir = './postman-test-scripts';
+const scriptsDir = './postman-test-scripts/transactionTests';
 const testFiles = fs.readdirSync(scriptsDir).filter(file => file.endsWith('.js'));
 
 // Przypisanie skryptów do odpowiednich elementów w kolekcji
