@@ -1,15 +1,9 @@
-name: Run API Tests
+name: CI
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,10 +13,10 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'
+        node-version: '20' # lub inna wersja, której chcesz używać
 
     - name: Install dependencies
       run: npm install
 
-    - name: Run API tests from folder
-      run: npm run test:folder
+    - name: Run tests
+      run: npm test
