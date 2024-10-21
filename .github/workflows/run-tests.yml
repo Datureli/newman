@@ -24,5 +24,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run API tests from folder
-      run: npm run test:folder
+    - name: Copy .env file
+      run: cp .env.example .env # Upewnij się, że .env.example jest dostępny, lub zmień to na właściwą ścieżkę
+
+    - name: Run API tests
+      run: node runTests.js
