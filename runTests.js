@@ -1,4 +1,7 @@
 require('dotenv').config();
+console.log('MOCK_API_URL:', process.env.MOCK_API_URL);
+console.log('MOCK_API_BALANCE_PATH:', process.env.MOCK_API_BALANCE_PATH);
+console.log('MOCK_API_TRANSACTIONS_PATH:', process.env.MOCK_API_TRANSACTIONS_PATH);
 const newman = require('newman');
 const fs = require('fs');
 const path = require('path');
