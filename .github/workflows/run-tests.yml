@@ -31,5 +31,8 @@ jobs:
           cat .env | grep -v '#' | xargs -I {} echo {} >> $GITHUB_ENV
         fi
 
+    - name: Debug environment variables
+      run: env | grep MOCK_API
+
     - name: Run API tests from runTests.js
       run: node runTests.js
