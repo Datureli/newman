@@ -24,15 +24,20 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Check if .env file exists
+      run: |
+        if [ ! -f .env ]; then
+          echo ".env file not found"
+          exit 1
+        fi
+        echo ".env file found, loading variables"
+
     - name: Load environment variables from .env file
       run: |
-        if [ -f .env ]; then
-          echo "Loading environment variables from .env file"
-          cat .env | grep -v '#' | xargs -I {} echo {} >> $GITHUB_ENV
-        fi
+        cat .env | grep -v '#' | xargs -I {} echo {} >> $GITHUB_ENV
 
     - name: Debug environment variables
-      run: env | grep MOCK_API
+      run: env | grep MOCK_API || echo "No MOCK_API variables found"
 
     - name: Run API tests from runTests.js
       run: node runTests.js
