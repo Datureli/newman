@@ -1,23 +1,28 @@
+name: Run API Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
-      MOCK_API_URL: https://run.mocky.io
-      MOCK_API_BALANCE_PATH: v3/56c76fcd-c28f-4dfb-915a-18880aee639b
-      MOCK_API_TRANSACTIONS_PATH: v3/21d2d81e-c71d-4e10-9a50-66e01de030a8
-      LOGIN_API_URL: https://run.mocky.io
-      LOGIN_API_LOGIN_PATH: v3/c393a3c2-d7b5-4ad0-a374-119558448a0b
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      - name: Run tests
-        run: node runTests.js
+    - name: Run API tests from folder
+      run: npm run test:folder
