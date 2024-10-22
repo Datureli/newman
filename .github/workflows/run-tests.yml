@@ -24,22 +24,12 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # Nowy krok: Załaduj zmienne środowiskowe z pliku .env
     - name: Load environment variables from .env file
       run: |
         if [ -f .env ]; then
           echo "Loading environment variables from .env file"
-          export $(cat .env | xargs)
+          cat .env | grep -v '#' | xargs -I {} echo {} >> $GITHUB_ENV
         fi
-
-    # Alternatywa, jeśli chcesz używać GitHub Secrets zamiast pliku .env
-    # - name: Load environment variables
-    #   run: |
-    #     echo "MOCK_API_URL=${{ secrets.MOCK_API_URL }}" >> $GITHUB_ENV
-    #     echo "MOCK_API_BALANCE_PATH=${{ secrets.MOCK_API_BALANCE_PATH }}" >> $GITHUB_ENV
-    #     echo "MOCK_API_TRANSACTIONS_PATH=${{ secrets.MOCK_API_TRANSACTIONS_PATH }}" >> $GITHUB_ENV
-    #     echo "LOGIN_API_URL=${{ secrets.LOGIN_API_URL }}" >> $GITHUB_ENV
-    #     echo "LOGIN_API_LOGIN_PATH=${{ secrets.LOGIN_API_LOGIN_PATH }}" >> $GITHUB_ENV
 
     - name: Run API tests from runTests.js
       run: node runTests.js
