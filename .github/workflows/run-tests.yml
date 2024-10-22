@@ -1,34 +1,34 @@
-name: Run API Tests
+name: Run API Tests # Nazwa workflow
 
-on:
-  push:
+on: # Zdarzenia, które uruchomią ten workflow
+  push: # Uruchomienie workflow po pushu
     branches:
-      - main
-  pull_request:
+      - main # Działa tylko na gałęzi 'main'
+  pull_request: # Uruchomienie workflow przy otwieraniu pull requestu
     branches:
-      - main
+      - main # Działa tylko dla pull requestów do gałęzi 'main'
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
+jobs: # Definicja zadań do wykonania w ramach workflow
+  test: # Identyfikator zadania
+    runs-on: ubuntu-latest # Określenie systemu operacyjnego, na którym będzie uruchamiane zadanie
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+    steps: # Lista kroków do wykonania w ramach zadania
+      - name: Checkout code # Krok do pobrania kodu z repozytorium
+        uses: actions/checkout@v3 # Użycie akcji GitHub do klonowania repozytorium
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
+      - name: Setup Node.js # Krok do konfiguracji środowiska Node.js
+        uses: actions/setup-node@v3 # Użycie akcji do ustawienia Node.js
+        with:
+          node-version: "20" # Określenie wersji Node.js do zainstalowania
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies # Krok do instalacji zależności
+        run: npm install # Wykonanie polecenia npm install w celu zainstalowania zależności z package.json
 
-    - name: Load environment variables
-      run: |
-        echo "MOCK_API_URL=${{ secrets.MOCK_API_URL }}" >> $GITHUB_ENV
-        echo "MOCK_API_BALANCE_PATH=${{ secrets.MOCK_API_BALANCE_PATH }}" >> $GITHUB_ENV
-        echo "MOCK_API_TRANSACTIONS_PATH=${{ secrets.MOCK_API_TRANSACTIONS_PATH }}" >> $GITHUB_ENV
+      - name: Load environment variables # Krok do ładowania zmiennych środowiskowych
+        run: | # Rozpoczęcie wielowierszowego polecenia powłoki
+          echo "MOCK_API_URL=${{ secrets.MOCK_API_URL }}" >> $GITHUB_ENV  # Dodanie zmiennej MOCK_API_URL do środowiska
+          echo "MOCK_API_BALANCE_PATH=${{ secrets.MOCK_API_BALANCE_PATH }}" >> $GITHUB_ENV  # Dodanie zmiennej MOCK_API_BALANCE_PATH
+          echo "MOCK_API_TRANSACTIONS_PATH=${{ secrets.MOCK_API_TRANSACTIONS_PATH }}" >> $GITHUB_ENV  # Dodanie zmiennej MOCK_API_TRANSACTIONS_PATH
 
-    - name: Run API tests from folder
-      run: npm run test:folder
+      - name: Run API tests from folder # Krok do uruchomienia testów API
+        run: npm run test:folder # Wykonanie skryptu testowego zdefiniowanego w package.json
