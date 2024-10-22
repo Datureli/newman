@@ -24,5 +24,11 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Load environment variables
+      run: |
+        echo "MOCK_API_URL=${{ secrets.MOCK_API_URL }}" >> $GITHUB_ENV
+        echo "MOCK_API_BALANCE_PATH=${{ secrets.MOCK_API_BALANCE_PATH }}" >> $GITHUB_ENV
+        echo "MOCK_API_TRANSACTIONS_PATH=${{ secrets.MOCK_API_TRANSACTIONS_PATH }}" >> $GITHUB_ENV
+
     - name: Run API tests from folder
       run: npm run test:folder
