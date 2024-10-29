@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-     "test": "newman run postman/Mock-bank_api.json",
+    "test": "newman run postman/Mock-bank_api.json",
     "test:folder": "node runTests.js",
     "test:login": "node runLoginTests.js"
   },
@@ -15,6 +15,10 @@
     "newman": "^6.2.1"
   },
   "dependencies": {
-    "dotenv": "^16.4.5"
+    "axios": "^1.7.7",
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2"
   }
 }

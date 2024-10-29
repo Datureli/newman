@@ -6,15 +6,13 @@ const path = require('path');
 // Wczytanie kolekcji Postmana dla API logowania
 const collectionLogin = require('./postman/User-login_api.json');
 
-// Wczytanie skryptów testowych
-const scriptsDir = './postman-test-scripts/loginTests'; // Zmień na odpowiednią ścieżkę
-const testFiles = fs.readdirSync(scriptsDir).filter(file => file.endsWith('.js'));
+// Wczytanie jednego pliku ze skryptami testowymi
+const scriptContent = fs.readFileSync('./postman-test-scripts/loginTests/userLoginTests.js', 'utf-8');
 
-// Przypisanie skryptów do odpowiednich elementów w kolekcji
-testFiles.forEach((file, index) => {
-    const scriptContent = fs.readFileSync(path.join(scriptsDir, file), 'utf-8');
-    collectionLogin.item[index].event = collectionLogin.item[index].event || [{ listen: 'test', script: { exec: [] } }];
-    collectionLogin.item[index].event[0].script.exec = scriptContent.split('\n');
+// Przypisanie skryptu do wszystkich elementów w kolekcji
+collectionLogin.item.forEach(item => {
+    item.event = item.event || [{ listen: 'test', script: { exec: [] } }];
+    item.event[0].script.exec = scriptContent.split('\n');
 });
 
 // Dynamiczne ustawienie URL-i z pliku .env
