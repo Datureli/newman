@@ -1,5 +1,5 @@
 const header = { "alg": "HS256", "typ": "JWT" };
-const payload = { "username": "john_doe", "role": "user", "iat": Math.floor(Date.now() / 1000) };
+const payload = { "iat": Math.floor(Date.now() / 1000) }; // tylko czas wygenerowania
 const secretKey = "TwojSekretnyKlucz";
 
 function base64urlEncode(source) {
@@ -14,5 +14,4 @@ const encodedSignature = base64urlEncode(signature);
 const jwtToken = `${encodedHeader}.${encodedPayload}.${encodedSignature}`;
 pm.environment.set("jwt_token", jwtToken);
 
-// Logowanie lokalnie wygenerowanego tokenu do konsoli
 console.log("Lokalnie wygenerowany token JWT:", jwtToken);
