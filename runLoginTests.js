@@ -1,21 +1,35 @@
 require('dotenv').config();
 const newman = require('newman');
 const fs = require('fs');
-const path = require('path');
 
 // Wczytanie kolekcji Postmana dla API logowania
 const collectionLogin = require('./postman/User-login_api.json');
 
-// Wczytanie jednego pliku ze skryptami testowymi
+// Wczytanie skryptu testowego i pre-request script z pliku
 const scriptContent = fs.readFileSync('./postman-test-scripts/loginTests/userLoginTests.js', 'utf-8');
+const preRequestScriptContent = fs.readFileSync('./postman-test-scripts/loginTests/preRequestScript.js', 'utf-8');
 
-// Przypisanie skryptu do wszystkich elementów w kolekcji
+// Dodanie Pre-request Script i testów do żądań w kolekcji
 collectionLogin.item.forEach(item => {
-    item.event = item.event || [{ listen: 'test', script: { exec: [] } }];
-    item.event[0].script.exec = scriptContent.split('\n');
+    item.event = item.event || [];
+    item.event.push({
+        listen: 'prerequest',
+        script: { exec: preRequestScriptContent.split('\n') }
+    });
+
+    item.event.push({
+        listen: 'test',
+        script: { exec: scriptContent.split('\n') }
+    });
+
+    item.request.header.push({
+        key: "Authorization",
+        value: "Bearer {{jwt_token}}",
+        type: "text"
+    });
 });
 
-// Dynamiczne ustawienie URL-i z pliku .env
+// Ustawienie dynamicznego URL-u na podstawie zmiennych środowiskowych
 collectionLogin.item.forEach(item => {
     item.request.url = {
         raw: `${process.env.LOGIN_API_URL}/${process.env.LOGIN_API_LOGIN_PATH}`,
@@ -23,10 +37,6 @@ collectionLogin.item.forEach(item => {
         host: process.env.LOGIN_API_URL.replace('https://', '').split('.'),
         path: process.env.LOGIN_API_LOGIN_PATH.split('/')
     };
-});
-
-// Debugging: Wyświetlenie przetworzonych URL-i
-collectionLogin.item.forEach(item => {
     console.log(`URL for ${item.name}: ${item.request.url.raw}`);
 });
 
