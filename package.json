@@ -2,6 +2,7 @@
   "name": "newman",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "newman run postman/Mock-bank_api.json",
@@ -15,6 +16,7 @@
     "newman": "^6.2.1"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.46.1",
     "axios": "^1.7.7",
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.5",
