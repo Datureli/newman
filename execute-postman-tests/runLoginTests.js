@@ -3,7 +3,7 @@ const newman = require('newman');
 const fs = require('fs');
 
 // Wczytanie kolekcji Postmana dla API logowania
-const collectionLogin = require('./postman/User-login_api.json');
+const collectionLogin = require('../postman/User-login_api.json');
 
 // Wczytanie skryptu testowego i pre-request script z pliku
 const scriptContent = fs.readFileSync('./postman-test-scripts/loginTests/userLoginTests.js', 'utf-8');

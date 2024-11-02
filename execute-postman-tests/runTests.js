@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Wczytanie kolekcji Postmana
-const collection = require('./postman/Mock-bank_api.json');
+const collection = require('../postman/Mock-bank_api.json');
 
 // Wczytanie skryptów testowych
 const scriptsDir = './postman-test-scripts/transactionTests';
