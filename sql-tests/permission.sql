@@ -30,7 +30,8 @@ INSERT IGNORE INTO role_permissions (role, permission_id) VALUES
     ('moderator', 4);  -- ban_user
 
 -- Pobranie akcji dla roli 'admin'
-SELECT p.action_name
+SELECT DISTINCT p.action_name
 FROM role_permissions rp
 JOIN permissions p ON rp.permission_id = p.id
 WHERE rp.role = 'admin';
+
