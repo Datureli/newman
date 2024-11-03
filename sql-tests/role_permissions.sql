@@ -19,19 +19,14 @@ INSERT IGNORE INTO permissions (action_name) VALUES
     ('delete_post'),
     ('ban_user');
 
--- Dodanie uprawnień dla poszczególnych ról, z użyciem INSERT IGNORE
-INSERT IGNORE INTO role_permissions (role, permission_id) VALUES
-    ('admin', 1),  -- create_post
-    ('admin', 2),  -- edit_post
-    ('admin', 3),  -- delete_post
-    ('admin', 4),  -- ban_user
-    ('moderator', 1),  -- create_post
-    ('moderator', 2),  -- edit_post
-    ('moderator', 4);  -- ban_user
+-- Uproszczone dodanie uprawnień dla poszczególnych ról
+INSERT IGNORE INTO role_permissions (role, permission_id)
+SELECT 'admin', id FROM permissions WHERE action_name IN ('create_post', 'edit_post', 'delete_post', 'ban_user')
+UNION ALL
+SELECT 'moderator', id FROM permissions WHERE action_name IN ('create_post', 'edit_post', 'ban_user');
 
--- Pobranie akcji dla roli 'admin'
+-- Pobranie unikalnych akcji dla roli 'admin'
 SELECT DISTINCT p.action_name
 FROM role_permissions rp
 JOIN permissions p ON rp.permission_id = p.id
 WHERE rp.role = 'admin';
-
