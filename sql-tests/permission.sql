@@ -1,38 +1,36 @@
--- Wybór bazy danych
-USE my_database;
-
--- Tworzenie tabeli permissions do przechowywania akcji, jakie mogą wykonywać użytkownicy
+-- Tworzenie tabeli permissions (uprawnienia)
 CREATE TABLE IF NOT EXISTS permissions (
-    id INT AUTO_INCREMENT PRIMARY KEY,  -- Używamy AUTO_INCREMENT zamiast SERIAL
-    action VARCHAR(50) NOT NULL 
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    action_name VARCHAR(50) NOT NULL UNIQUE
 );
 
-INSERT INTO permissions (action) VALUES
-('create_post'),
-('edit_post'),
-('delete_post'),
-('access_beta_features');
-
--- Tworzenie tabeli role_permissions dla przypisania uprawnień do ról
+-- Tworzenie tabeli role_permissions (przypisanie ról do uprawnień)
 CREATE TABLE IF NOT EXISTS role_permissions (
-    role ENUM('admin', 'player', 'beta_tester') NOT NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    role ENUM('admin', 'player', 'moderator') NOT NULL,
     permission_id INT NOT NULL,
     FOREIGN KEY (permission_id) REFERENCES permissions(id) ON DELETE CASCADE
 );
 
--- Przypisywanie uprawnień do ról
--- Admin ma pełne uprawnienia
-INSERT INTO role_permissions (role, permission_id) VALUES
-('admin', 1),
-('admin', 2),
-('admin', 3),
-('admin', 4);
+-- Dodanie uprawnień do tabeli permissions, z użyciem INSERT IGNORE, aby uniknąć duplikatów
+INSERT IGNORE INTO permissions (action_name) VALUES
+    ('create_post'),
+    ('edit_post'),
+    ('delete_post'),
+    ('ban_user');
 
--- Player może tworzyć i edytować posty
-INSERT INTO role_permissions (role, permission_id) VALUES
-('player', 1),
-('player', 2);
+-- Dodanie uprawnień dla poszczególnych ról, z użyciem INSERT IGNORE
+INSERT IGNORE INTO role_permissions (role, permission_id) VALUES
+    ('admin', 1),  -- create_post
+    ('admin', 2),  -- edit_post
+    ('admin', 3),  -- delete_post
+    ('admin', 4),  -- ban_user
+    ('moderator', 1),  -- create_post
+    ('moderator', 2),  -- edit_post
+    ('moderator', 4);  -- ban_user
 
--- Beta tester ma dostęp do funkcji beta
-INSERT INTO role_permissions (role, permission_id) VALUES
-('beta_tester', 4);
+-- Pobranie akcji dla roli 'admin'
+SELECT p.action_name
+FROM role_permissions rp
+JOIN permissions p ON rp.permission_id = p.id
+WHERE rp.role = 'admin';

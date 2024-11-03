@@ -12,3 +12,4 @@ UPDATE users SET token = 'updatedtoken' WHERE username = 'testuser';
 
 -- Usunięcie użytkownika testowego
 DELETE FROM users WHERE username = 'testuser';
+SELECT * FROM users WHERE role = 'admin';
