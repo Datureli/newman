@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS role_permissions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     role ENUM('admin', 'player', 'moderator') NOT NULL,
     permission_id INT NOT NULL,
-    FOREIGN KEY (permission_id) REFERENCES permissions(id) ON DELETE CASCADE
+    FOREIGN KEY (permission_id) REFERENCES permissions(id) ON DELETE CASCADE,
+    UNIQUE (role, permission_id)  -- Zapewnia unikalność kombinacji roli i uprawnienia
 );
 
 -- Dodanie uprawnień do tabeli permissions, z użyciem INSERT IGNORE, aby uniknąć duplikatów
@@ -19,7 +20,7 @@ INSERT IGNORE INTO permissions (action_name) VALUES
     ('delete_post'),
     ('ban_user');
 
--- Dodanie uprawnień dla poszczególnych ról
+-- Dodanie uprawnień dla poszczególnych ról, używając UNION, aby usunąć duplikaty
 INSERT IGNORE INTO role_permissions (role, permission_id)
 SELECT 'admin', id FROM permissions WHERE action_name IN ('create_post', 'edit_post', 'delete_post', 'ban_user')
 UNION
@@ -30,6 +31,3 @@ SELECT DISTINCT p.action_name
 FROM role_permissions rp
 JOIN permissions p ON rp.permission_id = p.id
 WHERE rp.role = 'admin';
-
-SHOW PROFILES; -- To pokazuje wszystkie zapytania, które były profilowane
-SHOW PROFILE FOR QUERY 1; -- Zamień '1' na właściwy identyfikator zapytania, jeśli to potrzebne
