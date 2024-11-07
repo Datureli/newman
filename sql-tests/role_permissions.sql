@@ -22,7 +22,7 @@ INSERT IGNORE INTO permissions (action_name) VALUES
 -- Dodanie uprawnień dla poszczególnych ról
 INSERT IGNORE INTO role_permissions (role, permission_id)
 SELECT 'admin', id FROM permissions WHERE action_name IN ('create_post', 'edit_post', 'delete_post', 'ban_user')
-UNION ALL
+UNION
 SELECT 'moderator', id FROM permissions WHERE action_name IN ('create_post', 'edit_post', 'ban_user');
 
 -- Pobranie unikalnych akcji dla roli 'admin'
