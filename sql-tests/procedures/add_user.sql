@@ -1,4 +1,3 @@
--- Ustawienie delimitera
 DELIMITER //
 
 -- Tworzenie procedury dodawania użytkownika
