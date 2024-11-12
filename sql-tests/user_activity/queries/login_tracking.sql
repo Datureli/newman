@@ -1,3 +1,4 @@
+SELECT 'Check Login Tracking' AS test_name;
 SELECT user_id, action, timestamp
 FROM user_activity
 WHERE user_id = 1 AND action = 'login'
