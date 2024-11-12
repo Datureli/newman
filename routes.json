@@ -1,6 +1,0 @@
-{
-  "/api/auth/login": "/users",
-  "/api/products": "/products",
-  "/api/cart": "/cart",
-  "/api/checkout": "/orders"
-}
