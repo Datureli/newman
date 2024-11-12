@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql');
 
@@ -5,12 +6,12 @@ const mysql = require('mysql');
 const app = express();
 const port = 3000;
 
-// Połączenie z bazą danych MySQL
+// Połączenie z bazą danych MySQL, korzystając ze zmiennych środowiskowych
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',  // zmień na nazwę użytkownika MySQL
-  password: 'misio11',  // zmień na hasło do MySQL
-  database: 'my_database'    // zmień na nazwę bazy danych
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
 // Sprawdzenie połączenia
