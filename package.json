@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "newman run postman/Mock-bank_api.json",
-    "test:folder": "node runTests.js",
-    "test:login": "node runLoginTests.js"
+    "test:folder": "node execute-postman-tests/runTests.js",
+    "test:login": "node execute-postman-tests/runLoginTests.js"
   },
   "keywords": [],
   "author": "",
