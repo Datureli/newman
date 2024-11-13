@@ -61,5 +61,5 @@ jobs:
         env:
           MYSQL_PWD: test_password
         run: |
-          mysql -h 127.0.0.1 -u test_user my_database < sql-tests/tests/add_permission_test.sql
-          mysql -h 127.0.0.1 -u test_user my_database < sql-tests/tests/leaderboard_test.sql
+          mysql -h 127.0.0.1 -u root my_database < sql-tests/tests/add_permission_test.sql
+          mysql -h 127.0.0.1 -u root my_database < sql-tests/tests/leaderboard_test.sql
