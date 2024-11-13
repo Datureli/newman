@@ -1,4 +1,4 @@
 -- Przykładowe dodawanie punktów
-INSERT INTO user_points (user_id, points) VALUES
+INSERT IGNORE INTO user_points (user_id, points) VALUES
     (1, 1500),
     (2, 2500);
