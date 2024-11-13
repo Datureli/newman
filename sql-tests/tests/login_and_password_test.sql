@@ -1,0 +1,2 @@
+source sql-tests/users_menagement/login_and_password_rules/seeds/passwordRules.sql
+source sql-tests/users_menagement/login_and_password_rules/seeds/securityChecks.sql
