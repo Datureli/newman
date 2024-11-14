@@ -1,3 +1,3 @@
 SELECT * 
 FROM users 
-WHERE LENGTH(password) < 6;
+WHERE LENGTH(password_hash) < 6;
