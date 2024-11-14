@@ -61,4 +61,5 @@ jobs:
           MYSQL_PWD: ${{ secrets.MYSQL_ROOT_PASSWORD }} # Hasło root z secrets
         run: |
           mysql -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -D ${{ secrets.MYSQL_DATABASE }} < sql-tests/tests/add_permission_test.sql
+          mysql -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -D ${{ secrets.MYSQL_DATABASE }} < sql-tests/tests/users_table_test.sql
           mysql -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -D ${{ secrets.MYSQL_DATABASE }} < sql-tests/tests/login_and_password_test.sql
