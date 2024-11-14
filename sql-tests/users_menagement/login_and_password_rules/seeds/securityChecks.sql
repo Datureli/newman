@@ -1,10 +1,3 @@
-SELECT username, 
-       password,
-       LENGTH(password) AS password_length
-FROM users
-WHERE LENGTH(password) < 8; -- Przykład: długość hasła mniejsza niż 8 znaków
-
-
 -- Sprawdzenie nieaktywnych użytkowników przez ponad 90 dni
 SELECT u.username
 FROM users u
