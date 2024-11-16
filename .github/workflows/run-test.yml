@@ -16,8 +16,8 @@ jobs:
       mysql: # Dodanie usługi MySQL
         image: mysql:latest
         env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}  # Hasło dla root
-          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}  # Baza danych, którą używasz
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }} # Hasło dla root
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }} # Baza danych, którą używasz
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
         ports:
           - 3306:3306
@@ -64,3 +64,5 @@ jobs:
           mysql -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -D ${{ secrets.MYSQL_DATABASE }} < sql-tests/tests/users_table_test.sql
             mysql -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -D ${{ secrets.MYSQL_DATABASE }} < sql-tests/tests/users_activity_test.sql
           mysql -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -D ${{ secrets.MYSQL_DATABASE }} < sql-tests/tests/login_and_password_test.sql
+           mysql -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -D ${{ secrets.MYSQL_DATABASE }} < sql-tests/tests/pucharse_test.sql
+            mysql -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} -D ${{ secrets.MYSQL_DATABASE }} < sql-tests/tests/leaderboard_test.sql
