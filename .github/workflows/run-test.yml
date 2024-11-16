@@ -37,7 +37,7 @@ jobs:
       - name: Define SQL base path and test files
         run: |
           echo "SQL_TEST_PATH=sql-tests/tests" >> $GITHUB_ENV
-          echo "SQL_TEST_FILES='add_permission_test.sql users_table_test.sql users_activity_test.sql login_and_password_test.sql pucharse_test.sql leaderboard_test.sql'" >> $GITHUB_ENV
+          echo "SQL_TEST_FILES=add_permission_test.sql users_table_test.sql users_activity_test.sql login_and_password_test.sql pucharse_test.sql leaderboard_test.sql" >> $GITHUB_ENV
 
       - name: Load environment variables
         run: |
