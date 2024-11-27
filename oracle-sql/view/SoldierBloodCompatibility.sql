@@ -1,3 +1,4 @@
+CREATE OR REPLACE VIEW DonorCompatibility AS
 SELECT 
     d.Name AS DonorName, 
     d.BloodType AS DonorBloodType,
@@ -15,3 +16,5 @@ GROUP BY
     d.Name, d.BloodType
 ORDER BY 
     d.Name;
+
+    
