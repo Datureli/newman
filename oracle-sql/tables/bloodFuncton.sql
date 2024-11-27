@@ -1,10 +1,13 @@
 SELECT 
-    d.Name AS DonorName, d.BloodType AS DonorBloodType,
-    r.Name AS RecipientName, r.BloodType AS RecipientBloodType,
-    CanDonateBlood(d.BloodType, r.BloodType) AS IsCompatible
+    d.Name AS DonorName, 
+    d.BloodType AS DonorBloodType,
+    r.Name AS RecipientName, 
+    r.BloodType AS RecipientBloodType,
+    'YES' AS IsCompatible
 FROM 
     Soldiers d
-CROSS JOIN 
-    Soldiers r
-WHERE 
-    d.SoldierID != r.SoldierID; -- Wykluczamy porównywanie żołnierza z samym sobą
+JOIN 
+    Soldiers r ON d.SoldierID != r.SoldierID
+JOIN 
+    BloodCompatibility bc ON d.BloodType = bc.DonorBloodType
+                          AND r.BloodType = bc.RecipientBloodType;
