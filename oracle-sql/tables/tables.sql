@@ -94,3 +94,10 @@ CREATE TABLE AccessLevels (
     AccessLevelName VARCHAR2(50) NOT NULL,                             -- Nazwa poziomu dostępu (np. "Top Secret", "Restricted")
     Description VARCHAR2(255)                                          -- Opis poziomu dostępu
 );
+
+
+CREATE TABLE BloodCompatibility (
+    DonorBloodType CHAR(3) NOT NULL,   -- Grupa krwi dawcy
+    RecipientBloodType CHAR(3) NOT NULL, -- Grupa krwi biorcy
+    CONSTRAINT PK_BloodCompatibility PRIMARY KEY (DonorBloodType, RecipientBloodType)
+);
