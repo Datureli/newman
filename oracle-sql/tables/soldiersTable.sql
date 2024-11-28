@@ -1,4 +1,3 @@
--- Soldiers
 BEGIN
    EXECUTE IMMEDIATE 'DROP TABLE Soldiers CASCADE CONSTRAINTS';
 EXCEPTION
@@ -13,6 +12,7 @@ CREATE TABLE Soldiers (
     Surname VARCHAR2(50) NOT NULL,
     BloodType CHAR(3) NOT NULL,
     Allergies CLOB,
-    MedicalHistory CLOB
+    MedicalHistory CLOB,
+    Image BLOB
 );
 

@@ -1,0 +1,2 @@
+ALTER TABLE Soldiers
+ADD Image BLOB;
